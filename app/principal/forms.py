@@ -14,8 +14,13 @@ class Productos(forms.ModelForm):
 		]
 
 		labels={
+<<<<<<< HEAD
 			'codigo': 'Codigo Producto'	,
 			'nombre': 'Nombre'	,
+=======
+			'codigo': 'CODIGO PRODUCTO'	,
+			'nombre': 'NOMBRE'	,
+>>>>>>> f9f8a21f8504ff503c830f3eef8eab0ff643034d
 		}
 
 		widgets={
@@ -38,12 +43,21 @@ class Registros(forms.ModelForm):
 		]
 
 		labels={
+<<<<<<< HEAD
 			'codigo': 'Codigo Produto'	,
 			'fecha': 'Fecha',
 			'concepto': 'Concepto',
 			'entrada': 'Entradas',
 			'salida':'Salidas',
 			'saldo':'Saldo',
+=======
+			'codigo': 'CODIGO PRODUCTO'	,
+			'fecha': 'FECHA',
+			'concepto': 'CONCEPTO',
+			'entrada': 'ENTRADAS',
+			'salida':'SALIDAS',
+			'saldo':'SALDO',
+>>>>>>> f9f8a21f8504ff503c830f3eef8eab0ff643034d
 		}
 
 		widgets={
