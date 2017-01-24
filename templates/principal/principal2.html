@@ -9,21 +9,14 @@
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
-<<<<<<< HEAD
 </form>	
 <div class="row">
 		<div class="col-md-3">
-=======
-
-<div class="row">
-		<div class="col-md-4">
->>>>>>> f9f8a21f8504ff503c830f3eef8eab0ff643034d
 			<div class="form-group">
 				<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
 				{{form.codigo}}
 			</div>
 		</div>
-<<<<<<< HEAD
 		<div class="col-md-5 col-md-offset-1">
 			<div class="form-group">
 				<h1> Ministerio de Salud</h1>
@@ -38,17 +31,11 @@
 </div>
 <div class="row">
 		<div class="col-md-3">
-=======
-</div>
-<div class="row">
-		<div class="col-md-4">
->>>>>>> f9f8a21f8504ff503c830f3eef8eab0ff643034d
 			<div class="form-group">
 				<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
 				{{form.nombre}}
 			</div>
 		</div>
-<<<<<<< HEAD
 		<div class="col-md-6">
 		<br>
 			<div class="form-group">
@@ -92,10 +79,4 @@
 </table> 
 
 
-=======
-	</div>
-
-
-</form>	
->>>>>>> f9f8a21f8504ff503c830f3eef8eab0ff643034d
 {% endblock %}
