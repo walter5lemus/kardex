@@ -2,15 +2,15 @@ from django.db import models
 
 # Create your models here.
 
-class Codigo(models.Model):
+class Producto(models.Model):
     codigo = models.CharField(max_length=10, primary_key=True)
-    nombre = models.CharField(max_length=500)
+    nombre = models.CharField(max_length=50)
 
     def __unicode__(self):
         return '{} {}'.format(self.codigo, self.nombre)
 
 class Kardex(models.Model):
-	codigo = models.ForeignKey(Codigo, null=False, blank=False, on_delete=models.CASCADE)
+	entrada = models.ForeignKey(Codigo, null=False, blank=False, on_delete=models.CASCADE)
 	fecha = models.DateField()
 	concepto = models.CharField(max_length=100)
 	entrada = models.IntegerField()
