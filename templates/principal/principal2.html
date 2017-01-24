@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+	Inicio
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+</form>	
+<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
+				{{form.codigo}}
+			</div>
+		</div>
+		<div class="col-md-5 col-md-offset-1">
+			<div class="form-group">
+				<h1> Ministerio de Salud</h1>
+			</div>
+		</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="codigo">Tarjeta N°</label>
+					<input type="text" class="form-control">
+				</div>
+		</div>
+</div>
+<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
+				{{form.nombre}}
+			</div>
+		</div>
+		<div class="col-md-6">
+		<br>
+			<div class="form-group">
+				<h4>Control de Existencia de Medicamentos e insumos Medicos</h4>
+			</div>
+		</div>
+	
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Fecha</td>
+			<td>Concepto</td>
+			<td>Entrada</td>
+			<td>Salidas</td>
+			<td>Saldo</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for solicitud in object_list %}
+		<tr>
+			<td>{{ solicitud.id }}</td>
+			<td>{{ solicitud.persona.nombre }} {{ solicitud.persona.apellidos }}</td>
+			<td>{{ solicitud.numero_mascotas }}</td>
+			<td>{{ solicitud.razones }}</td>
+			
+			<td>
+				<a class="btn btn-primary" href="{% url 'adopcion:solicitud_editar' solicitud.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'adopcion:solicitud_eliminar' solicitud.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de solicitudes</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+{% endblock %}
