@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 
 {% block title %}
 	Inicio
@@ -17,7 +18,11 @@
 				{{form.codigo}}
 			</div>
 		</div>
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-1">
+				<br>
+					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50">
+			</div>
+		<div class="col-md-5">
 			<div class="form-group">
 				<h1> Ministerio de Salud</h1>
 			</div>
@@ -30,23 +35,24 @@
 		</div>
 </div>
 <div class="row">
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="form-group">
 				<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
 				{{form.nombre}}
 			</div>
 		</div>
-		<div class="col-md-6">
-		<br>
-		<div class="form-group">
+		<div class="col-md-5">
+			<br>
+			<div class="form-group">
 				<h4>Control de Existencia de Medicamentos e insumos Medicos</h4>
 			</div>
 		</div>
-
-		<div class="form-group">
-				<button class="btn btn-primary">Nuevo</button>
+		<div class="col-md-2 col-md-offset-1">
+			<div class="form-group">
+				<br><br>
+				<button class="btn btn-danger">Nuevo</button>
+			</div>
 		</div>
-
 </div>
 
 <table class="table table-bordered">
@@ -80,7 +86,19 @@
 		<h1>No hay registros de ese Producto</h1>
 		{% endif %}
 	</tbody>
+	<tfoot>
+		
+	</tfoot>
+
 </table> 
+	<div class="row">
+		<div class="col-md-2">
+			<div class="form-group">
+				<br><br>
+				<button class="btn btn-danger">Nuevo</button>
+			</div>
+		</div>
+	</div>
 
 
 {% endblock %}
