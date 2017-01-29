@@ -8,7 +8,7 @@ class Producto(models.Model):
 
 
 	def __str__(self):
-		return  '{} {}'.format(self.nombre, self.apellidos)
+		return  '{} {}'.format(self.codigo, self.nombre)
 
 class Registro(models.Model):
 	codigo =models.ForeignKey(Producto,null=False, blank=False, on_delete=models.CASCADE)

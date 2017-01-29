@@ -24,6 +24,26 @@ class Productos(forms.ModelForm):
 			
 		}
 
+class ProductosHome(forms.ModelForm):
+	class Meta:
+		model = Producto
+
+		fields = [
+			'codigo',
+			'nombre',
+		]
+
+		labels={
+			'codigo': 'Codigo Producto'	,
+			'nombre': 'Nombre'	,
+		}
+
+		widgets={
+			'codigo': forms.Select(attrs={'class':'form-control'}),
+			'nombre': forms.TextInput(attrs={'class':'form-control'}),
+			
+		}
+
 class Registros(forms.ModelForm):
 	class Meta:
 		model = Registro

@@ -11,17 +11,36 @@ from app.principal.forms import *
 from app.principal.models import *
 
 # Create your views here.
-def principal1(request):
+def principal(request):
 	
+	productos=Producto.objects.all()
+	print productos
+
 	if request.method == 'POST':
-		form = Productos(request.POST,initial={})
-		form2 = Registros(request.POST,initial={})
+		form = ProductosHome(request.POST)
+		form = Registros(request.POST)
+
+
 		if form.is_valid() and form2.is_valid():
 			form.save()
 			form2.save()
 		return HttpResponseRedirect('/')
 	else:
 
-		form = Productos(initial={})
-		form2 = Registros(initial={})
-	return render(request, 'principal/principal2.html', {'form':form,'form2':form2})
+		form = ProductosHome()
+		form2 = Registros()
+	return render(request, 'principal/principal.html', {'form':form,'form2':form2,'productos':productos})
+
+def producto_nuevo(request):
+	
+	if request.method == 'POST':
+		form = Productos(request.POST)
+		if form.is_valid():
+			form.save()
+			
+		return HttpResponseRedirect('/')
+	else:
+
+		form = Productos()
+		
+	return render(request, 'principal/producto.html', {'form':form})

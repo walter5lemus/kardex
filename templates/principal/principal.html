@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 
+
 {% block title %}
 	Inicio
 {% endblock %}
@@ -16,11 +17,22 @@
 			<div class="form-group">
 				<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
 				{{form.codigo}}
+
+				
+					{% for producto in productos %}
+  						<!--<option value="{{ producto.pk }}">producto.nombre</option>-->
+  						<script type="text/javascript">
+  							console.log(producto.nombre )
+  							console.log("\n")
+  						</script>
+					{% endfor %}
+				
+
 			</div>
 		</div>
 		<div class="col-md-1">
 				<br>
-					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50">
+					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50" onclick="urlss()">
 			</div>
 		<div class="col-md-5">
 			<div class="form-group">
@@ -100,5 +112,13 @@
 		</div>
 	</div>
 
+<script type="text/javascript">
+	function urlss(){
+
+		//var producto = $('#id_codigo').val();
+		window.open("/principal/producto/","producto","width=500,height=500	,scrollbars=NO") 	
+	}
+
+</script>
 
 {% endblock %}
