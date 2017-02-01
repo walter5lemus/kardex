@@ -55,16 +55,17 @@
 		<div class="col-md-6 col-md-offset-8">
 			<div class="form-group">
 					<button type="button" onclick="javascript:window.close();" class="btn btn-warning">Cancelar</button>
-					<button type="submit" class="btn btn-success" >Agregar</button>
+					<button type="submit" class="btn btn-success" onclick="refreshParent();">Agregar</button>
 			</div>
 		</div>
 
 
 </form>
-<script type="text/javascript">
-
-
-
+<script>
+    window.onunload = refreshParent;
+    function refreshParent() {
+        window.opener.location.reload();
+    }
 </script>
 
 {% endblock %}

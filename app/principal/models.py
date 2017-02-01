@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Producto(models.Model):
-	codigo = models.CharField(max_length=50)
+	codigo = models.CharField(max_length=50,primary_key=True)
 	nombre = models.CharField(max_length=70)
 
 

@@ -44,3 +44,12 @@ def producto_nuevo(request):
 		form = Productos()
 		
 	return render(request, 'principal/producto.html', {'form':form})
+
+class busquedaNombre(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		nombre = Producto.objects.filter(codigo=cod)
+		
+		data = serializers.serialize('json', nombre, fields=('nombre'))
+
+		return HttpResponse(data, content_type='application/json')

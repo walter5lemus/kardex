@@ -6,6 +6,9 @@
 	Inicio
 {% endblock %}
 {% block header %}
+<script type="text/javascript">
+	var i = 0;
+</script>
 {% endblock %}
 
 {% block content %}
@@ -17,14 +20,26 @@
 			<div class="form-group">
 				<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
 				{{form.codigo}}
+				<script type="text/javascript">
+				$('#id_codigo').append($('<option>', {value: i, text:'Seleccione una Opcion'}));
+				</script>
 
-				
-					{% for producto in productos.codigo.all %}
-  						<!--<option value="{{ producto.pk }}">producto.nombre</option>-->
-  						<script type="text/javascript">
-  							console.log(producto.nombre )
-  							console.log("\n")
-  						</script>
+					{% for producto in productos %}
+
+					<script type="text/javascript">
+						
+						$('#select_fichas').find('option').remove().end().val('whatever');
+
+  						i=i+1;
+						$('#id_codigo').append($('<option>', {value: i, text:'{{producto.codigo}}'}));
+
+						$("select[id=id_codigo]").change(function(){
+							
+
+        				    $('select[id=id_codigo]').val();
+        				});
+
+  					</script>
 					{% endfor %}
 				
 
@@ -114,10 +129,27 @@
 
 <script type="text/javascript">
 	function urlss(){
-
-		//var producto = $('#id_codigo').val();
 		window.open("/principal/producto/","producto","width=500,height=500	,scrollbars=NO") 	
 	}
+
+	function buscar(){
+		var codigo = $('select[id=id_codigo]').val();
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/principal/buscar/nombre/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					$('#id_nombre').val(data[i].fields.nombre);
+				}
+			}
+		});
+	}
+
+	$("select[id=id_codigo]").change(function(){
+		buscar();
+        });
+
 
 </script>
 
