@@ -38,7 +38,7 @@ def producto_nuevo(request):
 		if form.is_valid():
 			form.save()
 			
-		return HttpResponseRedirect('/')
+		return HttpResponse('<script type="text/javascript">window.close()</script>')
 	else:
 
 		form = Productos()

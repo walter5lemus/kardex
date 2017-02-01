@@ -19,7 +19,7 @@
 				{{form.codigo}}
 
 				
-					{% for producto in productos %}
+					{% for producto in productos.codigo.all %}
   						<!--<option value="{{ producto.pk }}">producto.nombre</option>-->
   						<script type="text/javascript">
   							console.log(producto.nombre )
