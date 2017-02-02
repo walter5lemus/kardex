@@ -6,6 +6,7 @@ from app.principal.views import *
 urlpatterns = [
 	url(r'^nuevo', principal, name= 'principal'),
 	url(r'^producto',producto_nuevo, name= 'nuevo_producto'),
+	url(r'^registro',registro_nuevo, name= 'nuevo_registro'),
 
 	url(r'^buscar/nombre/',busquedaNombre.as_view(),name='busqueda_nombre'),
 ]

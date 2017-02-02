@@ -23,22 +23,14 @@
 				<script type="text/javascript">
 				$('#id_codigo').append($('<option>', {value: i, text:'Seleccione una Opcion'}));
 				</script>
-
 					{% for producto in productos %}
-
 					<script type="text/javascript">
-						
 						$('#select_fichas').find('option').remove().end().val('whatever');
-
   						i=i+1;
 						$('#id_codigo').append($('<option>', {value: i, text:'{{producto.codigo}}'}));
-
 						$("select[id=id_codigo]").change(function(){
-							
-
         				    $('select[id=id_codigo]').val();
         				});
-
   					</script>
 					{% endfor %}
 				
@@ -47,7 +39,7 @@
 		</div>
 		<div class="col-md-1">
 				<br>
-					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50" onclick="urlss()">
+					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50" onclick="urls_nuevoProducto()">
 			</div>
 		<div class="col-md-5">
 			<div class="form-group">
@@ -62,7 +54,7 @@
 		</div>
 </div>
 <div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group">
 				<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
 				{{form.nombre}}
@@ -77,7 +69,7 @@
 		<div class="col-md-2 col-md-offset-1">
 			<div class="form-group">
 				<br><br>
-				<button class="btn btn-danger">Nuevo</button>
+				<button class="btn btn-danger" width="50" height="50" onclick="urls_nuevoRegistro();">Nuevo</button>
 			</div>
 		</div>
 </div>
@@ -128,8 +120,12 @@
 	</div>
 
 <script type="text/javascript">
-	function urlss(){
+	function urls_nuevoProducto(){
 		window.open("/principal/producto/","producto","width=500,height=500	,scrollbars=NO") 	
+	}
+
+	function urls_nuevoRegistro(){
+		window.open("/principal/registro/","registro","width=500,height=500	,scrollbars=NO") 	
 	}
 
 	function buscar(){

@@ -14,7 +14,6 @@ from app.principal.models import *
 def principal(request):
 	
 	productos=Producto.objects.all()
-	print productos
 
 	if request.method == 'POST':
 		form = ProductosHome(request.POST)
@@ -44,6 +43,22 @@ def producto_nuevo(request):
 		form = Productos()
 		
 	return render(request, 'principal/producto.html', {'form':form})
+
+def registro_nuevo(request):
+	if request.method == 'POST':
+		form = Registros(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponse('<script type="text/javascript">window.close()</script>')
+
+	else:
+
+		form = Registros()
+		
+	return render(request, 'principal/registro.html', {'form':form})
+
+
+
 
 class busquedaNombre(TemplateView):
 	def get(self,request,*args,**kwargs):
