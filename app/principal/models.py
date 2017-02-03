@@ -1,3 +1,4 @@
+from __future__ import unicode_literals	
 from django.db import models
 
 # Create your models here.
@@ -7,18 +8,17 @@ class Producto(models.Model):
 	nombre = models.CharField(max_length=70)
 
 
-	def __str__(self):
-		return  '{} {}'.format(self.codigo, self.nombre)
+	def __unicode__(self):
+		return  '{}'.format(self.codigo)
 
 class Registro(models.Model):
 	codigo =models.ForeignKey(Producto,null=False, blank=False, on_delete=models.CASCADE)
 	fecha = models.DateField()
 	concepto = models.CharField(max_length=200)
-	razones = models.TextField()
-	entrada = models.IntegerField()
-	salida = models.IntegerField()
+	entrada = models.IntegerField(null=True, blank=True)
+	salida = models.IntegerField(null=True, blank=True)
 	saldo = models.IntegerField()
 
-	def __str__(self):
-		return  '{} {}'.format(self.codigo, self.fecha)
+	def __unicode__(self):
+		return  '{}'.format(self.codigo)
 

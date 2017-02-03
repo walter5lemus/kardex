@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django import forms
 from app.principal.models import *
 from django.contrib.admin import widgets
@@ -19,8 +20,8 @@ class Productos(forms.ModelForm):
 		}
 
 		widgets={
-			'codigo': forms.TextInput(attrs={'class':'form-control'}),
-			'nombre': forms.TextInput(attrs={'class':'form-control'}),
+			'codigo': forms.TextInput(attrs={'class':'form-control','required': True,'pattern':'[0-9]{8}','title':'Codigo Mal Escrito!!! Por Favor dijite el codigo como el siguiente\nEjemplo: 00000001'}),
+			'nombre': forms.TextInput(attrs={'class':'form-control','required': True}),
 			
 		}
 
@@ -68,8 +69,8 @@ class Registros(forms.ModelForm):
 		}
 
 		widgets={
-			'codigo': forms.TextInput(attrs={'class':'form-control'}),
-			'fecha': forms.DateInput(attrs={'class':'form-control'}),
+			'codigo': forms.HiddenInput(attrs={'class':'form-control'}),
+			'fecha': forms.TextInput(attrs={'class':'form-control'}),
 			'concepto': forms.Textarea(attrs={'class':'form-control','rows':5, 'cols':3}),	
 			'entrada': forms.NumberInput(attrs={'class':'form-control','min':1}),
 			'salida':forms.NumberInput(attrs={'class':'form-control','min':1}),

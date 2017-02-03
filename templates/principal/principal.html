@@ -49,7 +49,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="codigo">Tarjeta N°</label>
-					<input type="text" class="form-control">
+					<input id="id_tarjeta" type="text" class="form-control">
 				</div>
 		</div>
 </div>
@@ -74,50 +74,12 @@
 		</div>
 </div>
 
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<td>Fecha</td>
-			<td>Concepto</td>
-			<td>Entrada</td>
-			<td>Salidas</td>
-			<td>Saldo</td>
-		</tr>
-		
-	</thead>
-	<tbody>
-		{% if object_list %}
-		{% for solicitud in object_list %}
-		<tr>
-			<td>{{ solicitud.id }}</td>
-			<td>{{ solicitud.persona.nombre }} {{ solicitud.persona.apellidos }}</td>
-			<td>{{ solicitud.numero_mascotas }}</td>
-			<td>{{ solicitud.razones }}</td>
-			
-			<td>
-				<a class="btn btn-primary" href="{% url 'adopcion:solicitud_editar' solicitud.id %}">Editar</a>
-				<a class="btn btn-danger" href="{% url 'adopcion:solicitud_eliminar' solicitud.id %}">Eliminar</a>
-			</td>
-		</tr>
-		{% endfor %}
-		
-		{% else %}
-		<h1>No hay registros de ese Producto</h1>
-		{% endif %}
-	</tbody>
-	<tfoot>
-		
-	</tfoot>
-
-</table> 
-	<div class="row">
-		<div class="col-md-2">
-			<div class="form-group">
-				<br><br>
-				<button class="btn btn-danger">Nuevo</button>
-			</div>
+<div class="table-responsive col-md-12">
+		<div id="conteiner">
+	
 		</div>
 	</div>
+	
 
 <script type="text/javascript">
 	function urls_nuevoProducto(){
@@ -125,12 +87,22 @@
 	}
 
 	function urls_nuevoRegistro(){
-		window.open("/principal/registro/","registro","width=500,height=500	,scrollbars=NO") 	
+		var codigo = $("#id_codigo option:selected").text();
+		var valor = $("#id_codigo option:selected").val();
+
+		if(valor==0){
+			alert("No ha seleccionado un Codigo para el Producto");
+		}
+		else{
+		window.open("/principal/registro/"+codigo+"/","registro","width=500,height=500	,scrollbars=NO") 	
+		}
 	}
 
 	function buscar(){
-		var codigo = $('select[id=id_codigo]').val();
+		var codigo = $("#id_codigo option:selected").text()
+
 		$.ajax({
+
 			data : {'codigo':codigo},
 			url : '/principal/buscar/nombre/',
 			type : 'get',
@@ -140,10 +112,44 @@
 				}
 			}
 		});
+
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/principal/buscar/elementos/',
+			type : 'get',
+			success: function(data){
+				var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
+                tabla += '<thead>';
+                tabla += '<tr>';
+                tabla += '<th>Fecha</th><th>Concepto</th><th>Entradas</th><th>Salidas</th><th>Saldo</th>';		
+                tabla += '</tr>';
+                tabla += '</thead>';
+                tabla += '<tbody>';
+                tr = '';
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].fields.entrada==null) {
+						data[i].fields.entrada=0;
+					}
+					if (data[i].fields.salida==null) {
+						data[i].fields.salida=0;
+					}
+					tr += '<tr>';
+                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td>'+data[i].fields.saldo+'</td>';
+                    tr += '</tr>';
+				}
+				tabla += tr;
+                tabla += '</tbody></table>';
+ 
+                $('#conteiner').html( tabla );
+			}
+		});
+
 	}
 
 	$("select[id=id_codigo]").change(function(){
 		buscar();
+
+
         });
 
 

@@ -5,7 +5,64 @@
 	Nuevo Registro
 {% endblock %}
 {% block header %}
+<style>
 
+
+
+.section input[type="radio"],
+.section input[type="checkbox"]{
+  display: none;
+}
+
+
+
+/* Base styles for spans */
+.container span::before,
+.container span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* Radio buttons */
+.container span.radio:hover {
+  cursor: pointer;
+}
+.container span.radio::before {
+  left: -52px;
+  width: 45px;
+  height: 25px;
+  background-color: #A8AAC1;
+  border-radius: 50px;
+}
+.container span.radio::after {
+  left: -49px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background-color: #6C788A;
+  transition: left .25s, background-color .25s;
+}
+input[type="radio"]:checked + label span.radio::after {
+  left: -27px;
+  background-color: #EBFF43;
+}
+
+
+input[type="checkbox"]:checked + label span.checkbox::after {
+  color: #62AFFF;
+}
+
+	.ocultar{
+		display: none;
+	}
+	.ocultar2{
+		display: none;
+	}
+
+</style>
   {% endblock %}
 
 
@@ -34,8 +91,15 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
 					{{form.codigo}}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label for="{{form2.codigo.nombre}}">{{ form2.nombre.label }}</label>
+					{{form2.nombre}}
 				</div>
 			</div>
 		</div>
@@ -64,9 +128,24 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="col-md-5">
+			<section id="first" class="section">
+			    <div class="container">
+			      <input type="radio" name="group1" id="radio-1">
+			      <label for="radio-1"><span class="radio">Entrada</span></label>
+			    </div>
+			    <div class="container">
+			      <input type="radio" name="group1" id="radio-2">
+			      <label for="radio-2"><span class="radio">Salida</span></label>
+			    </div>
+
+			</section>
+		</div>
+
 		<div class="row">
 			<div class="col-md-5">
-				<div class="form-group">
+				<div class="form-group ocultar" >
 					<label for="{{form.entrada.name}}">{{ form.entrada.label }}</label>
 					{{form.entrada}}
 				</div>
@@ -74,7 +153,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-5">
-				<div class="form-group">
+				<div class="form-group ocultar2">
 					<label for="{{form.salida.name}}">{{ form.salida.label }}</label>
 					{{form.salida}}
 				</div>
@@ -102,8 +181,22 @@
 <script>
     window.onunload = refreshParent;
     function refreshParent() {
+
         window.opener.location.reload();
     }
+
+    $('#id_entrada').change(function() {
+    	var valor = $('#id_entrada').val();
+    	var saldo = parseFloat(valor) + parseFloat({{saldo}});
+    	$('#id_saldo').val(saldo);
+	});
+
+    $('#id_salida').change(function() {
+	var valor = $('#id_salida').val();
+	var saldo = parseFloat({{saldo}})-parseFloat(valor);
+	$('#id_saldo').val(saldo);
+	});
+
 
 
 
@@ -130,6 +223,24 @@
 		$.datepicker.setDefaults($.datepicker.regional["es"]);
 	    $( "#id_fecha" ).datepicker();
 	  } );
+
+	$('input:radio[id="radio-1"]').change(
+    function(){
+        if ($(this).is(':checked')) {
+ 		$(".ocultar").css("display", "block");
+ 		$(".ocultar2").css("display", "none");
+        }
+    });
+    	$('input:radio[id="radio-2"]').change(
+    function(){
+        if ($(this).is(':checked')) {
+        	$(".ocultar").css("display", "none");
+        	$(".ocultar2").css("display", "block");
+  
+        }
+    });
+
+
 </script>
 
 

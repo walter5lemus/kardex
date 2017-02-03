@@ -37,34 +37,55 @@ def producto_nuevo(request):
 		if form.is_valid():
 			form.save()
 			
-		return HttpResponse('<script type="text/javascript">window.close()</script>')
+		return HttpResponse('<script type="text/javascript">window.unload(buscar())</script>')
 	else:
 
 		form = Productos()
 		
 	return render(request, 'principal/producto.html', {'form':form})
 
-def registro_nuevo(request):
+def registro_nuevo(request,codigo):
+	str(codigo)
+	productos=Producto.objects.get(codigo=codigo)
+	saldo = 0
+	if Registro.objects.filter(codigo=codigo).exists():
+		registros = list(Registro.objects.filter(codigo=codigo))
+		pos = len(registros)
+		saldo = registros[pos-1].saldo
+		print saldo
+
+
 	if request.method == 'POST':
 		form = Registros(request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponse('<script type="text/javascript">window.close()</script>')
-
 	else:
 
-		form = Registros()
-		
-	return render(request, 'principal/registro.html', {'form':form})
+		form = Registros(initial={'codigo':codigo,'saldo':saldo})
+		form2 = ProductosHome(initial={'nombre':productos.nombre})
+	return render(request, 'principal/registro.html', {'form':form,'form2':form2,'saldo':saldo})
 
 
 
 
+
+
+# Busquedas AJAX!!!!
 class busquedaNombre(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
 		nombre = Producto.objects.filter(codigo=cod)
 		
 		data = serializers.serialize('json', nombre, fields=('nombre'))
+
+		return HttpResponse(data, content_type='application/json')
+
+class busquedaElementos(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		elementos = Registro.objects.filter(codigo=cod)
+		
+		data = serializers.serialize('json', elementos, fields=('codigo','fecha','concepto','entrada','salida','saldo'))
 
 		return HttpResponse(data, content_type='application/json')
