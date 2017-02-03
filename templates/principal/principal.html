@@ -9,12 +9,11 @@
 <script type="text/javascript">
 	var i = 0;
 </script>
+
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-	{% csrf_token %}
-</form>	
+
 <div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
@@ -37,13 +36,10 @@
 
 			</div>
 		</div>
-		<div class="col-md-1">
-				<br>
-					  <input type=image src="{% static 'images/mas.png' %}" width="50" height="50" onclick="urls_nuevoProducto()">
-			</div>
-		<div class="col-md-5">
+
+		<div class="col-md-6">
 			<div class="form-group">
-				<h1> Ministerio de Salud</h1>
+				<h1> <center>	Ministerio de Salud</center></h1>
 			</div>
 		</div>
 			<div class="col-md-3">
@@ -60,10 +56,10 @@
 				{{form.nombre}}
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<br>
 			<div class="form-group">
-				<h4>Control de Existencia de Medicamentos e insumos Medicos</h4>
+				<h4><center>Control de Existencia de Medicamentos e insumos Medicos</center> </h4>
 			</div>
 		</div>
 		<div class="col-md-2 col-md-offset-1">
@@ -72,19 +68,76 @@
 				<button class="btn btn-danger" width="50" height="50" onclick="urls_nuevoRegistro();">Nuevo</button>
 			</div>
 		</div>
-</div>
+	</div>
+	<div class="divOcultar">
+		<form method="POST">
+		{% csrf_token %}
 
-<div class="table-responsive col-md-12">
-		<div id="conteiner">
-	
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-2">
+						<label for="{{form2.codigo.nombre}}">{{ form2.codigo.label }}</label>
+						{{form2.codigo}}
+					</div>
+					<div class="col-md-2">
+						<label for="{{form2.concepto.name}}">{{ form2.concepto.label }}</label>
+						{{form2.concepto}}
+					</div>
+					<div class="col-md-2">
+						<label for="{{form2.fecha.name}}">{{ form2.fecha.label }}</label>
+						{{form2.fecha}}
+					</div>
+
+					<div class="col-md-4">
+						<section id="first" class="section">
+							<div class="col-md-6">
+						    	<div class="row">
+								    <div class="col-md-12">
+								      <input type="radio" name="group1" id="radio-1">
+								      <label for="radio-1"><span class="radio">Entrada</span></label>
+								    </div>
+								</div>
+							    <div class="row">
+								    <div class="col-md-12">
+								      <input type="radio" name="group1" id="radio-2">
+								      <label for="radio-2"><span class="radio" >Salida</span></label>
+								    </div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group ocultar" >
+								<label for="{{form2.entrada.name}}">{{ form2.entrada.label }}</label>
+								{{form2.entrada}}
+								</div>
+								<div class="form-group ocultar2">
+									<label for="{{form2.salida.name}}">{{ form2.salida.label }}</label>
+									{{form2.salida}}
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="col-md-2">
+							<div class="form-group">
+								<label for="{{form2.saldo.name}}">{{ form2.saldo.label }}</label>
+								{{form2.saldo}}
+							</div>
+						</div>
+					</div>
+				</div>
+		</form>	
+
+	</div>
+	<br>
+	<div class="row">
+		<div class="table-responsive col-md-12">
+			<div id="conteiner">
+
+			</div>
 		</div>
 	</div>
-	
 
 <script type="text/javascript">
-	function urls_nuevoProducto(){
-		window.open("/principal/producto/","producto","width=500,height=500	,scrollbars=NO") 	
-	}
+
 
 	function urls_nuevoRegistro(){
 		var codigo = $("#id_codigo option:selected").text();
@@ -94,8 +147,9 @@
 			alert("No ha seleccionado un Codigo para el Producto");
 		}
 		else{
-		window.open("/principal/registro/"+codigo+"/","registro","width=500,height=500	,scrollbars=NO") 	
-		}
+		 		$(".divOcultar").css("display", "block");
+	
+			}
 	}
 
 	function buscar(){
@@ -133,9 +187,26 @@
 					if (data[i].fields.salida==null) {
 						data[i].fields.salida=0;
 					}
-					tr += '<tr>';
+										if (data[i].fields.entrada==null) {
+						data[i].fields.entrada=0;
+					}
+					if (data[i].fields.salida==null) {
+						data[i].fields.salida=0;
+					}
+					if (data[i].fields.entrada>0){
+						tr += '<tr>';
+	                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="succ">'+data[i].fields.saldo+'</td>';
+	                    tr += '</tr>';						
+					}
+					if (data[i].fields.salida>0){
+						tr += '<tr >';
+	                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="Dan">'+data[i].fields.saldo+'</td>';
+	                    tr += '</tr>';						
+						}
+					
+					/*tr += '<tr>';
                     tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td>'+data[i].fields.saldo+'</td>';
-                    tr += '</tr>';
+                    tr += '</tr>';*/
 				}
 				tabla += tr;
                 tabla += '</tbody></table>';
@@ -151,6 +222,58 @@
 
 
         });
+
+	$('#id_entrada').change(function() {
+	    var valor = $('#id_entrada').val();
+	    var saldo = parseFloat(valor) + parseFloat({{saldo}});
+	    $('#id_saldo').val(saldo);
+	});
+
+    $('#id_salida').change(function() {
+		var valor = $('#id_salida').val();
+		var saldo = parseFloat({{saldo}})-parseFloat(valor);
+		$('#id_saldo').val(saldo);
+	});
+
+	$('.fecha').change(function() {
+		
+		var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+		
+		    var today = new Date();
+		    var dayDiff = Math.ceil(today - f) / (1000 * 60 * 60 * 24 * 365);
+		    var age = parseInt(dayDiff);
+		    $('#{{form.edad.auto_id}}').val(age)
+		    $('#{{form.edad_registro.auto_id}}').val(age)
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	    
+
+	});
+
+	$( function() {
+		$.datepicker.setDefaults($.datepicker.regional["es"]);
+	    $( "#id_fecha" ).datepicker();
+	  } );
+
+	$('input:radio[id="radio-1"]').change(
+    function(){
+        if ($(this).is(':checked')) {
+ 		$(".ocultar").css("display", "block");
+ 		$(".ocultar2").css("display", "none");
+        }
+    });
+    	$('input:radio[id="radio-2"]').change(
+    function(){
+        if ($(this).is(':checked')) {
+        	$(".ocultar").css("display", "none");
+        	$(".ocultar2").css("display", "block");
+  
+        }
+    });
 
 
 </script>

@@ -5,8 +5,14 @@ from app.principal.views import *
 
 urlpatterns = [
 	url(r'^nuevo', principal, name= 'principal'),
-	url(r'^producto',producto_nuevo, name= 'nuevo_producto'),
+
+
+	url(r'^producto/$',producto_nuevo, name= 'nuevo_producto'),
+	url(r'^producto/listar/',producto_list.as_view(), name= 'producto_listar'),
+
+
 	url(r'^registro/(?P<codigo>[0-9]{8})',registro_nuevo, name= 'nuevo_registro'),
+
 
 	url(r'^buscar/nombre/',busquedaNombre.as_view(),name='busqueda_nombre'),
 	url(r'^buscar/elementos/',busquedaElementos.as_view(),name='busqueda_elemento'),

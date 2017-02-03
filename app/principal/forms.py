@@ -69,7 +69,7 @@ class Registros(forms.ModelForm):
 		}
 
 		widgets={
-			'codigo': forms.HiddenInput(attrs={'class':'form-control'}),
+			'codigo': forms.TextInput(attrs={'class':'form-control'}),
 			'fecha': forms.TextInput(attrs={'class':'form-control'}),
 			'concepto': forms.Textarea(attrs={'class':'form-control','rows':5, 'cols':3}),	
 			'entrada': forms.NumberInput(attrs={'class':'form-control','min':1}),

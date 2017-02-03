@@ -6,6 +6,8 @@ from collections import OrderedDict
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect	
 import json
+from django.views.generic import ListView,CreateView,UpdateView,DeleteView
+
 from django.core import serializers
 from app.principal.forms import *
 from app.principal.models import *
@@ -30,6 +32,10 @@ def principal(request):
 		form2 = Registros()
 	return render(request, 'principal/principal.html', {'form':form,'form2':form2,'productos':productos})
 
+###########################################################################################################
+################################     PRODUCTO       #######################################################
+###########################################################################################################
+
 def producto_nuevo(request):
 	
 	if request.method == 'POST':
@@ -37,13 +43,25 @@ def producto_nuevo(request):
 		if form.is_valid():
 			form.save()
 			
-		return HttpResponse('<script type="text/javascript">window.unload(buscar())</script>')
+		return HttpResponseRedirect('/principal/nuevo')
 	else:
 
 		form = Productos()
 		
 	return render(request, 'principal/producto.html', {'form':form})
 
+class producto_list(ListView):
+	model = Producto
+	template_name = 'principal/producto_listar.html'
+	paginate_by = 10
+
+def producto_listado(request):
+	lista= serializers.serialize('json',Producto.objects.all(), fields=['codigo','nombre'])
+	return HttpResponse(lista,content_type='application/json')
+
+###########################################################################################################
+################################     REGISTRO       #######################################################
+###########################################################################################################
 def registro_nuevo(request,codigo):
 	str(codigo)
 	productos=Producto.objects.get(codigo=codigo)
