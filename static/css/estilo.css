@@ -47,6 +47,7 @@ input[type="checkbox"]:checked + label span.checkbox::after {
 .divOcultar{
   display: none;
 }
+
 .ocultar{
 	display: none;
 }
@@ -79,7 +80,17 @@ body {
   color: #000;
 }
 
-.divOcultar{
+.divOcultar {
+  padding: 20px;
+  border-color: solid black;
+  border-style: ridge;
+}
+
+.divOcultar2{
+  display: none;
+}
+
+.divOcultar2{
   padding: 20px;
   border-color: solid black;
   border-style: ridge;

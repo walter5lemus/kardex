@@ -9,7 +9,7 @@ class Producto(models.Model):
 
 
 	def __unicode__(self):
-		return  '{}'.format(self.codigo)
+		return  '{} {}'.format(self.codigo, self.nombre)
 
 class Registro(models.Model):
 	codigo =models.ForeignKey(Producto,null=False, blank=False, on_delete=models.CASCADE)
@@ -20,5 +20,5 @@ class Registro(models.Model):
 	saldo = models.IntegerField()
 
 	def __unicode__(self):
-		return  '{}'.format(self.codigo)
+		return  '{} '.format(self.codigo)
 

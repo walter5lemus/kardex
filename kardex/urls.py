@@ -20,9 +20,14 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import login, logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView
+from django.core.urlresolvers import reverse_lazy
+
 # -*- coding: utf-8 -*-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('app.principal.urls',namespace="home")),
     url(r'^principal/', include('app.principal.urls',namespace="principal")),
+    url(r'^accounts/login/', login, {'template_name':'index.html'}, name='login'),
+    url(r'^logout/', logout_then_login,name='logout'),
 ]

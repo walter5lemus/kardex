@@ -9,271 +9,408 @@
 <script type="text/javascript">
 	var i = 0;
 </script>
+<style type="text/css">
+	.divOcultar2{
+		display:none;
+	}
+	.divOcultar2{
+	  padding: 20px;
+	  border-color: solid black;
+	  border-style: ridge;
+	}
+</style>
 
 {% endblock %}
 
 {% block content %}
 
-<div class="row">
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
-				{{form.codigo}}
-				<script type="text/javascript">
-				$('#id_codigo').append($('<option>', {value: i, text:'Seleccione una Opcion'}));
-				</script>
-					{% for producto in productos %}
-					<script type="text/javascript">
-						$('#select_fichas').find('option').remove().end().val('whatever');
-  						i=i+1;
-						$('#id_codigo').append($('<option>', {value: i, text:'{{producto.codigo}}'}));
-						$("select[id=id_codigo]").change(function(){
-        				    $('select[id=id_codigo]').val();
-        				});
-  					</script>
-					{% endfor %}
-				
-
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<div class="form-group">
-				<h1> <center>	Ministerio de Salud</center></h1>
-			</div>
-		</div>
+	<div class="row ocultarlo" >
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="codigo">Tarjeta N°</label>
-					<input id="id_tarjeta" type="text" class="form-control">
+					<label for="{{form.codigo.name}}">{{ form.codigo.label }}</label>
+					{{form.codigo}}
+					<script type="text/javascript">
+					$('#id_codigo').append($('<option>', {value: i, text:'Seleccione una Opcion'}));
+					</script>
+						{% for producto in productos %}
+						<script type="text/javascript">
+							$('#select_fichas').find('option').remove().end().val('whatever');
+	  						i=i+1;
+							$('#id_codigo').append($('<option>', {value: i, text:'{{producto.codigo}}'}));
+							$("select[id=id_codigo]").change(function(){
+	        				    $('select[id=id_codigo]').val();
+	        				});
+	  					</script>
+						{% endfor %}
+					
+
 				</div>
-		</div>
-</div>
-<div class="row">
-		<div class="col-md-3">
-			<div class="form-group">
-				<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
-				{{form.nombre}}
 			</div>
-		</div>
-		<div class="col-md-6">
-			<br>
-			<div class="form-group">
-				<h4><center>Control de Existencia de Medicamentos e insumos Medicos</center> </h4>
-			</div>
-		</div>
-		<div class="col-md-2 col-md-offset-1">
-			<div class="form-group">
-				<br><br>
-				<button class="btn btn-danger" width="50" height="50" onclick="urls_nuevoRegistro();">Nuevo</button>
-			</div>
-		</div>
-	</div>
-	<div class="divOcultar">
-		<form method="POST">
-		{% csrf_token %}
 
-			<div class="row">
+			<div class="col-md-6">
 				<div class="form-group">
-					<div class="col-md-2">
-						<label for="{{form2.codigo.nombre}}">{{ form2.codigo.label }}</label>
-						{{form2.codigo}}
+					<h1> <center>HNNSFC</center></h1>
+				</div>
+			</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="codigo">Tarjeta N°</label>
+						<input id="id_tarjeta" type="text" class="form-control">
 					</div>
-					<div class="col-md-2">
-						<label for="{{form2.concepto.name}}">{{ form2.concepto.label }}</label>
-						{{form2.concepto}}
-					</div>
-					<div class="col-md-2">
-						<label for="{{form2.fecha.name}}">{{ form2.fecha.label }}</label>
-						{{form2.fecha}}
-					</div>
+			</div>
+	</div>
 
-					<div class="col-md-4">
-						<section id="first" class="section">
-							<div class="col-md-6">
-						    	<div class="row">
-								    <div class="col-md-12">
-								      <input type="radio" name="group1" id="radio-1">
-								      <label for="radio-1"><span class="radio">Entrada</span></label>
-								    </div>
-								</div>
-							    <div class="row">
-								    <div class="col-md-12">
-								      <input type="radio" name="group1" id="radio-2">
-								      <label for="radio-2"><span class="radio" >Salida</span></label>
-								    </div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group ocultar" >
-								<label for="{{form2.entrada.name}}">{{ form2.entrada.label }}</label>
-								{{form2.entrada}}
-								</div>
-								<div class="form-group ocultar2">
-									<label for="{{form2.salida.name}}">{{ form2.salida.label }}</label>
-									{{form2.salida}}
-								</div>
-							</div>
-						</section>
+	<div class="row">
+			<div class="col-md-3 ocultarlo">
+				<div class="form-group">
+					<label for="{{form.nombre.name}}">{{ form.nombre.label }}</label>
+					{{form.nombre}}
+				</div>
+			</div>
+			<div class="col-md-6 ocultarlo">
+				<br>
+				<div class="form-group">
+					<h4><center>Control de Existencia de Medicamentos e insumos Medicos</center> </h4>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<br><br>
+					<div class="col-md-6">
+						<button class="btn btn-danger" width="50" height="50" onclick="urls_nuevoRegistro();">Nuevo</button>
 					</div>
-					<div class="col-md-2">
-							<div class="form-group">
-								<label for="{{form2.saldo.name}}">{{ form2.saldo.label }}</label>
-								{{form2.saldo}}
+					<div class="col-md-6">
+						<button class="btn btn-danger" width="50" height="50" onclick="urls_nuevoReporte();">Imprimir</button>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="divOcultar">	
+			{% csrf_token %}
+
+				<div class="row">
+					<div class="form-group">
+							{{form2.codigo}}
+						<div class="col-md-3">
+							<label for="{{form2.concepto.name}}">{{ form2.concepto.label }}</label>
+							{{form2.concepto}}
+						</div>
+						<div class="col-md-2">
+							<label for="{{form2.fecha.name}}">{{ form2.fecha.label }}</label>
+							{{form2.fecha}}
+						</div>
+
+						<div class="col-md-4">
+							<section id="first" class="section">
+								<div class="col-md-6">
+							    	<div class="row">
+									    <div class="col-md-12">
+									      <input type="radio" name="group1" id="radio-1">
+									      <label for="radio-1"><span class="radio">Entrada</span></label>
+									    </div>
+									</div>
+								    <div class="row">
+									    <div class="col-md-12">
+									      <input type="radio" name="group1" id="radio-2">
+									      <label for="radio-2"><span class="radio" >Salida</span></label>
+									    </div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group ocultar" >
+									<label for="{{form2.entrada.name}}">{{ form2.entrada.label }}</label>
+									{{form2.entrada}}
+									</div>
+									<div class="form-group ocultar2">
+										<label for="{{form2.salida.name}}">{{ form2.salida.label }}</label>
+										{{form2.salida}}
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="col-md-3">
+								<div class="form-group">
+									<label for="{{form2.saldo.name}}">{{ form2.saldo.label }}</label>
+									{{form2.saldo}}
+								</div>
 							</div>
 						</div>
 					</div>
+
+				<button onclick="ingresoRegistro();" class="btn btn-success">Agregar</button>
+	</div>
+<br>
+	<div class="divOcultar2">
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-4 col-md-offset-1">
+						<label for="fecha1">Fecha de Inicio</label>	
+						<select class="form-control" id="id_fecha1" name="fecha1">
+						</select>	
+					</div>
+					<div class="col-md-4">
+						<label for="fecha2">Fecha de Fin</label>	
+						<select class="form-control" id="id_fecha2" name="fecha2">	
+						</select>	
+					</div>
+					<br>
+					<button class="btn btn-danger" width="50" height="50" onclick="urls_generarReporte();">Generar</button>
 				</div>
-		</form>	
-
-	</div>
-	<br>
-	<div class="row">
-		<div class="table-responsive col-md-12">
-			<div id="conteiner">
-
+				
 			</div>
-		</div>
 	</div>
+<br>
+	<div class="row ocultarlo">
+			<div class="table-responsive col-md-12">
+				<div id="conteiner">
+
+				</div>
+			</div>
+	</div>
+
+
 
 <script type="text/javascript">
 
+	 	var saldogral;
 
-	function urls_nuevoRegistro(){
-		var codigo = $("#id_codigo option:selected").text();
-		var valor = $("#id_codigo option:selected").val();
 
-		if(valor==0){
-			alert("No ha seleccionado un Codigo para el Producto");
-		}
-		else{
-		 		$(".divOcultar").css("display", "block");
-	
-			}
-	}
+// Esta Funcion hace el ingreso de los datos con un POST y AJAX
+		function ingresoRegistro(){
+			var codigo = $("#id_codigo option:selected").text()
+			var concepto = $('#id_concepto').val();
+			var fecha = $('#id_fecha').val();
+			var entrada = $('#id_entrada').val();
+			var salida = $('#id_salida').val();
+			var saldo = $('#id_saldo').val();
 
-	function buscar(){
-		var codigo = $("#id_codigo option:selected").text()
+			if(codigo == ""){
+				alert("El codigo esta vacio")
+			}else{
+				if(concepto == ""){
+				alert("El concepto esta vacio")
+				}else{
+					if(fecha == ""){
+						alert("El fecha esta vacio")
+					}else{
+						if(entrada == "" && salida == "" ){
+							alert("La entrada y salida estan vacias")
+						}else{
+								$.ajax({
 
-		$.ajax({
-
-			data : {'codigo':codigo},
-			url : '/principal/buscar/nombre/',
-			type : 'get',
-			success: function(data){
-				for (var i = 0; i < data.length; i++) {
-					$('#id_nombre').val(data[i].fields.nombre);
-				}
-			}
-		});
-
-		$.ajax({
-			data : {'codigo':codigo},
-			url : '/principal/buscar/elementos/',
-			type : 'get',
-			success: function(data){
-				var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
-                tabla += '<thead>';
-                tabla += '<tr>';
-                tabla += '<th>Fecha</th><th>Concepto</th><th>Entradas</th><th>Salidas</th><th>Saldo</th>';		
-                tabla += '</tr>';
-                tabla += '</thead>';
-                tabla += '<tbody>';
-                tr = '';
-				for (var i = 0; i < data.length; i++) {
-					if (data[i].fields.entrada==null) {
-						data[i].fields.entrada=0;
-					}
-					if (data[i].fields.salida==null) {
-						data[i].fields.salida=0;
-					}
-										if (data[i].fields.entrada==null) {
-						data[i].fields.entrada=0;
-					}
-					if (data[i].fields.salida==null) {
-						data[i].fields.salida=0;
-					}
-					if (data[i].fields.entrada>0){
-						tr += '<tr>';
-	                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="succ">'+data[i].fields.saldo+'</td>';
-	                    tr += '</tr>';						
-					}
-					if (data[i].fields.salida>0){
-						tr += '<tr >';
-	                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="Dan">'+data[i].fields.saldo+'</td>';
-	                    tr += '</tr>';						
+									data : {'codigo':codigo,'concepto':concepto,'fecha':fecha,'entrada':entrada,'salida':salida,'saldo':saldo,},
+									url: '/principal/nuevo/elemento/',
+								    type: "POST",
+								    success: function (response) {
+								    	var concepto = $('#id_concepto').val("");
+										var fecha = $('#id_fecha').val("");
+										var entrada = $('#id_entrada').val("");
+										var salida = $('#id_salida').val("");
+										var saldo = $('#id_saldo').val(""); 
+										buscar();
+										$(".divOcultar").css("display", "none");
+								    }
+								});		
+							}
 						}
-					
-					/*tr += '<tr>';
-                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td>'+data[i].fields.saldo+'</td>';
-                    tr += '</tr>';*/
+					}
 				}
-				tabla += tr;
-                tabla += '</tbody></table>';
- 
-                $('#conteiner').html( tabla );
+
+			
+		}
+
+
+//Esta funcion se ejecuta al darle click en el boton nuevo
+		function urls_nuevoRegistro(){
+			$(".divOcultar2").css("display", "none");
+			var codigo = $("#id_codigo option:selected").text();
+			var valor = $("#id_codigo option:selected").val();
+
+			if(valor==0){
+				alert("No ha seleccionado un Codigo para el Producto");
+			}
+			else{
+			 		$(".divOcultar").css("display", "block");
+			 		$('#id_codigo2').val(codigo);
+		
+				}
+		}
+
+//esta función se ejecuta al darle click al boton de Imprimir
+		function urls_nuevoReporte(){
+			$(".divOcultar").css("display", "none");
+			var codigo = $("#id_codigo option:selected").text();
+			var valor = $("#id_codigo option:selected").val();
+
+			if(valor==0){
+				alert("No ha seleccionado un Codigo para el Producto");
+			}
+			else{
+			 		$(".divOcultar2").css("display", "block");
+			 		
+		
+				}
+		}
+
+//se ejecuta al darle el boton Generar y se abre una nueva ventana con los datos para el reporte 		
+		function urls_generarReporte(){
+			var codigo = $("#id_codigo option:selected").text();
+			var fecha1 = $("#id_fecha1 option:selected").text();
+			var fecha2 = $("#id_fecha2 option:selected").text();
+			window.open("/principal/reporte/"+codigo+"/"+fecha1+"/"+fecha2+"/");
+
+ 			
+		}
+
+//esta función hace la consulta para rellenar la tabla, y demas elementos del home
+		function buscar(){
+			var codigo = $("#id_codigo option:selected").text();
+	//Este ajax hace una consulta y busca el nombre de ese codigo
+			$.ajax({
+
+				data : {'codigo':codigo},
+				url : '/principal/buscar/nombre/',
+				type : 'get',
+				success: function(data){
+					for (var i = 0; i < data.length; i++) {
+						$('#id_nombre').val(data[i].fields.nombre);
+					}
+				}
+			});
+
+			$.ajax({
+				data : {'codigo':codigo},
+				url : '/principal/buscar/elementos/',
+				type : 'get',
+				success: function(data){
+
+					$('#id_saldo').val(0);
+					saldogral=0;
+
+
+					var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="tabla">';
+	                tabla += '<thead>';
+	                tabla += '<tr>';
+	                tabla += '<th>Fecha</th><th>Concepto</th><th>Entradas</th><th>Salidas</th><th>Saldo</th>';		
+	                tabla += '</tr>';
+	                tabla += '</thead>';
+	                tabla += '<tbody>';
+	                tr = '';
+					for (var i = 0; i < data.length; i++) {
+						if (data[i].fields.entrada==null) {
+							data[i].fields.entrada=0;
+						}
+						if (data[i].fields.salida==null) {
+							data[i].fields.salida=0;
+						}
+
+						if (data[i].fields.entrada>0){
+							tr += '<tr>';
+		                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="succ">'+data[i].fields.saldo+'</td>';
+		                    tr += '</tr>';						
+						}
+						if (data[i].fields.salida>0){
+							tr += '<tr >';
+		                    tr += '<td>'+data[i].fields.fecha+'</td><td>'+data[i].fields.concepto+'</td><td>'+data[i].fields.entrada+'</td><td>'+data[i].fields.salida+'</td><td class="Dan">'+data[i].fields.saldo+'</td>';
+		                    tr += '</tr>';						
+							}
+						$('#id_saldo').val(data[i].fields.saldo);
+						saldogral = data[i].fields.saldo;
+
+					}
+					tabla += tr;
+	                tabla += '</tbody></table>';
+	 
+	                $('#conteiner').html( tabla );
+
+	                $(document).ready(function(){
+					    $('#tabla').DataTable();
+					 
+					});
+				}
+			});
+
+			$.ajax({
+				//var i=0;
+				data : {'codigo':codigo},
+				url : '/principal/buscar/fechas/',
+				type : 'get',
+				success: function(data){
+					for (var i = 0; i < data.length-1; i++) {
+						$('#id_fecha1').append($('<option>', {value: i, text:data[i].fields.fecha}));
+					}
+					for (var i = 1; i < data.length; i++) {
+						$('#id_fecha2').append($('<option>', {value: i, text:data[i].fields.fecha}));
+					}
+				}
+			});
+
+		}
+
+//al cambiar el elemento en el select cambia el valor en el input		
+		$("select[id=id_codigo]").change(function(){
+			buscar();
+			var codigo = $("#id_codigo option:selected").text()
+			$('#id_codigo2').val(codigo);
+
+
+	        });
+
+// Se ocupa para los datos de entrada y salida con el saldo
+		$('#id_entrada').change(function() {
+		    var valor = $('#id_entrada').val();
+		    var saldo = parseFloat(valor) + parseFloat(saldogral);
+		    $('#id_saldo').val(saldo);
+		});
+
+	    $('#id_salida').change(function() {
+			var valor = $('#id_salida').val();
+			var saldo = parseFloat(saldogral)-parseFloat(valor);
+			if (saldo < 0){
+				alert("El Saldo no puede ser menor a 0");
+
+			}else{
+				$('#id_saldo').val(saldo);
 			}
 		});
 
-	}
 
-	$("select[id=id_codigo]").change(function(){
-		buscar();
+//función para habilitar el calendario del input fecha
+		$( function() {
+			$.datepicker.setDefaults($.datepicker.regional["es"]);
+		    $( "#id_fecha" ).datepicker();
+		  } );
+
+// se ocupa para los radio button
+		$('input:radio[id="radio-1"]').change(
+	    function(){
+	        if ($(this).is(':checked')) {
+	 		$(".ocultar").css("display", "block");
+	 		$('#id_entrada').val("");
+	 		$('#id_saldo').val(saldogral);
+	 		$(".ocultar2").css("display", "none");
+	        }
+	    });
+	    	$('input:radio[id="radio-2"]').change(
+	    function(){
+	        if ($(this).is(':checked')) {
+	        	$(".ocultar").css("display", "none");
+	 			$('#id_salida').val("");
+	 			$('#id_saldo').val(saldogral);
+	        	$(".ocultar2").css("display", "block");
+	  
+	        }
+	    });
 
 
-        });
+//oculta los div cuando se da click fuera de los botones
+		$('.ocultarlo').click(function() {
+	        	$(".divOcultar").css("display", "none");
+	        	$(".divOcultar2").css("display", "none");
+		});
 
-	$('#id_entrada').change(function() {
-	    var valor = $('#id_entrada').val();
-	    var saldo = parseFloat(valor) + parseFloat({{saldo}});
-	    $('#id_saldo').val(saldo);
-	});
 
-    $('#id_salida').change(function() {
-		var valor = $('#id_salida').val();
-		var saldo = parseFloat({{saldo}})-parseFloat(valor);
-		$('#id_saldo').val(saldo);
-	});
-
-	$('.fecha').change(function() {
-		
-		var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
-		
-		    var today = new Date();
-		    var dayDiff = Math.ceil(today - f) / (1000 * 60 * 60 * 24 * 365);
-		    var age = parseInt(dayDiff);
-		    $('#{{form.edad.auto_id}}').val(age)
-		    $('#{{form.edad_registro.auto_id}}').val(age)
-
-		    var date = new Date();
-	        var month = date.getMonth()+ 1;
-	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-	        console.log(dateString);
-	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
-	    
-
-	});
-
-	$( function() {
-		$.datepicker.setDefaults($.datepicker.regional["es"]);
-	    $( "#id_fecha" ).datepicker();
-	  } );
-
-	$('input:radio[id="radio-1"]').change(
-    function(){
-        if ($(this).is(':checked')) {
- 		$(".ocultar").css("display", "block");
- 		$(".ocultar2").css("display", "none");
-        }
-    });
-    	$('input:radio[id="radio-2"]').change(
-    function(){
-        if ($(this).is(':checked')) {
-        	$(".ocultar").css("display", "none");
-        	$(".ocultar2").css("display", "block");
-  
-        }
-    });
 
 
 </script>
