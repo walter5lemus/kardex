@@ -27,7 +27,7 @@ SECRET_KEY = 'ph3)_hu^%(4mvf6(s#e@73cvk1sm7ks2m@vt%s+f(3s@=-e1j2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wluna.pythonanywhere.com']
 
 
 # Application definition
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'kardex.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kardex',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'wluna$kardex',
+        'USER': 'wluna',
+        'PASSWORD': 'Walter92292',
+        'HOST': 'wluna.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
@@ -127,12 +127,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_ROOT =  os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT =  '/home/wluna/kardex/static/'
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = '/home/wluna/kardex/media/'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
+STATICFILES_DIRS=('/home/wluna/static/',)
 
 LOGIN_REDIRECT_URL = reverse_lazy('principal:principal')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
